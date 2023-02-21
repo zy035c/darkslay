@@ -1,0 +1,23 @@
+sourceSets.main.java.srcDirs = [ "src/" ]
+
+sourceCompatibility = '1.7'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+ext {
+	mainClassName = "com.woodburn.darkslay.IOSLauncher"
+}
+
+launchIPhoneSimulator.dependsOn build
+launchIPadSimulator.dependsOn build
+launchIOSDevice.dependsOn build
+createIPA.dependsOn build
+
+robovm {
+	archs = "thumbv7:arm64"
+}
+
+dependencies {
+    implementation 'org.apache.logging.log4j:log4j-api:2.19.0'
+}
+
+eclipse.project.name = appName + "-ios"
