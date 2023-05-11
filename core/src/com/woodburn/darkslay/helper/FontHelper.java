@@ -10,6 +10,9 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.woodburn.darkslay.global_config.DisplayConfig;
 import com.woodburn.darkslay.global_config.Settings;
 import com.badlogic.gdx.files.FileHandle;
+
+import java.util.HashMap;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,6 +42,15 @@ public class FontHelper {
     public static BitmapFont turnNumFont;
     public static BitmapFont damageNumberFont;
 
+
+    /*
+     * For option panel screen descript
+     */
+    public static BitmapFont charDescFont;
+
+
+    public static BitmapFont charTitleFont;
+
     // title/main menu button font
     public static BitmapFont buttonLabelFont;
 
@@ -46,7 +58,11 @@ public class FontHelper {
     static FreeTypeFontGenerator.FreeTypeFontParameter param = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
 
+    /**************************************** INITIALIZE STARTS ****************************************************/
     public static void initialize() {
+
+        // long startTime = System.currentTimeMillis();
+        HashMap<Character, Integer> paramCreator = new HashMap<>();
 
         switch (Settings.language) {
             case ENG:
@@ -77,11 +93,48 @@ public class FontHelper {
         //
         //
 
+        /*
+         * For damageNumberFont. 
+         * Also used in Screen option Panels.
+         */
+        param.borderWidth = 3.0F * DisplayConfig.scale;
+        param.borderColor = Color.DARK_GRAY;
+        damageNumberFont = prepFont(48.0F, true);
+        damageNumberFont.getData().setLineHeight((damageNumberFont.getData()).lineHeight * 0.85F); // don't understand
+
+        /*
+         * For charDescFont
+         * Used in Screen option Panels.
+         */
+        // data.xChars = new chars[] {'动'}  What's happening here in oringinal code?!
+        param.hinting = FreeTypeFontGenerator.Hinting.Slight;
+        param.spaceX = 0;
+        param.kerning = true;
+
+        paramCreator.clear();
+
+        param.borderWidth = 0.0F;
+        param.gamma = 0.9F;
+        param.borderGamma = 0.9F;
+        param.shadowColor = Settings.QUARTER_TRANSPARENT_BLACK_COLOR;
+        param.shadowOffsetX = (int)(4.0F * DisplayConfig.scale);
+        charDescFont = prepFont(30.0F, false); // if isMobile, size=31.0F
+
+        param.gamma = 1.8F;
+        param.borderGamma = 1.8F;
+        param.shadowOffsetX = (int) (6.0F * DisplayConfig.scale);
+        charTitleFont = prepFont(44.0F, false);
+
     }
+    /**************************************** INITIALIZE ENDS ****************************************************/
 
 
-    // ...............
-
+    /**
+     * Only specify size and linear-filter. Use default font, Kreon Bold.
+     * @param size
+     * @param isLinearFiltering
+     * @return
+     */
     public static BitmapFont prepFont(float size, boolean isLinearFiltering) {
 
         // if no?
@@ -90,6 +143,14 @@ public class FontHelper {
         return prepFont(g, size, isLinearFiltering);
     }
 
+    /**
+     * Prep a font, return a BitmapFont with the current state of param.
+     * So must prepare param before calling this function.
+     * @param g
+     * @param size
+     * @param isLinearFiltering
+     * @return : BitmapFont
+     */
     public static BitmapFont prepFont(FreeTypeFontGenerator g, float size, boolean isLinearFiltering) {
         param.size = Math.round(size * fontScale * DisplayConfig.scale);
         return g.generateFont(param);
@@ -97,7 +158,9 @@ public class FontHelper {
 
     // ...............
 
-
+    /**
+     * A temporary layout that is going to be changed for each single text render
+     */
     public static GlyphLayout layout = new GlyphLayout();
     private static float spaceWidth;
 
@@ -144,4 +207,69 @@ public class FontHelper {
         font.draw(sb, msg, x, y);
 
     }
+
+
+    /**
+     * Set the layout and return the scaled width
+     * @param font
+     * @param text
+     * @param scale
+     * @return : float
+     */
+    public static float getWidth(BitmapFont font, String text, float scale) {
+        layout.setText(font, text);
+        return layout.width * scale;
+    }
+
+    /**
+     * Set the layout and return the scaled height
+     * @param font
+     * @param text
+     * @param scale
+     * @return : float 
+     */
+    public static float getHeight(BitmapFont font, String text, float scale) {
+        layout.setText(font, text);
+        return layout.height * scale;
+    }
+
+    /**
+     * Render a font ... with lineWidth and scale
+     * @param sb
+     * @param font
+     * @param msg
+     * @param x
+     * @param y
+     * @param lineWidth : float
+     * @param c : Color
+     * @param scale : float
+     */
+    public static void renderFontCenteredHeight(
+        SpriteBatch sb, BitmapFont font, String msg, float x, float y, float lineWidth, Color c, float scale
+    ) {
+        font.getData().setScale(scale); // Set scaling
+        layout.setText(font, msg, c, lineWidth, 1, true);
+        font.setColor(c);
+        font.draw(sb, msg, x, y + layout.height / 2.0F, lineWidth, 1, true); // Center-align to y-axis
+        font.getData().setScale(1.0F); // Resume scaling.
+    }
+
+    /**
+     * Render a font ... with lineWidth and NO scale
+     * @param sb
+     * @param font
+     * @param msg
+     * @param x
+     * @param y
+     * @param lineWidth
+     * @param c
+     */
+    public static void renderFontCenteredHeight(
+        SpriteBatch sb, BitmapFont font, String msg, float x, float y, float lineWidth, Color c
+    ) {
+        layout.setText(font, msg, c, lineWidth, 1, true);
+        font.setColor(c);
+        font.draw(sb, msg, x, y + layout.height / 2.0F, lineWidth, 1, true); // Center-align to y-axis
+    }
+
 }

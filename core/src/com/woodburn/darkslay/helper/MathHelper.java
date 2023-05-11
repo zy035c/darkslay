@@ -46,4 +46,14 @@ public class MathHelper {
         return startX;
     }
 
+    public static float cardScaleLerpSnap(float startX, float targetX) {
+        if (startX != targetX) {
+            startX = MathUtils.lerp(startX, targetX, Gdx.graphics.getDeltaTime() * 7.5F);
+            if (Math.abs(startX - targetX) < 0.003F) {
+                startX = targetX;
+            }
+        }
+        return startX;
+    }
+
 }

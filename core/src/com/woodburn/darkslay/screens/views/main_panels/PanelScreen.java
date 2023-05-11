@@ -54,19 +54,34 @@ public class PanelScreen {
         
         // this.panels.clear();
 
+        /* */
         this.panels.add(
             new MainPanelButton(
                 MainPanelButton.MainPanelResult.PLAY_NORMAL, 
-                MainPanelButton.PanelColor.BLUE, 
+                MainPanelButton.PanelColor.GRAY, 
                 DisplayConfig.WIDTH / 2.0F - (450F * DisplayConfig.scale), 
-                PANEL_Y)
+                PANEL_Y
+            )
         );
+
+        /* */
         this.panels.add(
             new MainPanelButton(
                 MainPanelButton.MainPanelResult.PLACEHOLDER, 
                 MainPanelButton.PanelColor.RED, 
                 DisplayConfig.WIDTH / 2.0F, 
-                PANEL_Y)
+                PANEL_Y
+            )
+        );
+
+        /* */
+        this.panels.add(
+            new MainPanelButton(
+                MainPanelButton.MainPanelResult.INFINITE, 
+                MainPanelButton.PanelColor.BLUE, 
+                DisplayConfig.WIDTH / 2.0F + (450F * DisplayConfig.scale), 
+                PANEL_Y
+            )
         );
     }
 
@@ -76,8 +91,13 @@ public class PanelScreen {
      */
     private void initText() {
         
-        TEXT.put("PLAY_NORMAL", "PLAY");
-        TEXT.put("PLACEHOLDER", "PLACEHOLDER");
+        TEXT.put("PLAY_NORMAL", "Standard");
+        TEXT.put("INFINITE", "Infinite");
+        TEXT.put("PLACEHOLDER", "Drangleic...");
+
+        TEXT.put("PLAY_NORMAL desc", "Embark on a quest to Slay the Spire.");
+        TEXT.put("PLACEHOLDER desc", "Placeholder ...");
+        TEXT.put("INFINITE desc", "Customize your own run with unique modifiers.");
     }
 
     public void update() {
@@ -96,8 +116,6 @@ public class PanelScreen {
         for (MainPanelButton panel: this.panels) {
             panel.update();
         }
-
-        // if panel is clicked...
 
     }
 

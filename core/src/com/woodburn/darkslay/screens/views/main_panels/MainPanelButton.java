@@ -4,10 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
+import com.woodburn.darkslay.core.GameStat;
 import com.woodburn.darkslay.global_config.DisplayConfig;
 import com.woodburn.darkslay.global_config.Settings;
+import com.woodburn.darkslay.helper.FontHelper;
 import com.woodburn.darkslay.helper.HitBox;
 import com.woodburn.darkslay.helper.ImageMaster;
 import com.woodburn.darkslay.helper.InputHelper;
@@ -53,18 +56,19 @@ public class MainPanelButton {
 
 
     public enum MainPanelResult {
-        PLAY_NORMAL, PLACEHOLDER;
+        PLAY_NORMAL, PLACEHOLDER, INFINITE;
     }
 
     /**
      * Color of the card-shape panel
      */
     public enum PanelColor {
-        RED, BLUE, GRAY;
+        RED, BLUE, BEIGE, GRAY;
     }
 
     private Texture panelImg = ImageMaster.PANEL_BG_BLUE;
     private String header = "error";
+    private String description = "null";
 
     private Texture portraitImg;
 
@@ -74,15 +78,33 @@ public class MainPanelButton {
 
         // set text for different result
         switch (this.result) {
+
             case PLAY_NORMAL:
+   
                 this.header = PanelScreen.TEXT.get("PLAY_NORMAL");
-                // description...
+                this.description = PanelScreen.TEXT.get("PLAY_NORMAL desc");
                 this.portraitImg = ImageMaster.P_STANDARD;
-                this.panelImg = ImageMaster.PANEL_BG_RED;
+                this.panelColor = PanelColor.BEIGE;
+                // beige background by default
                 break;
-            case PLACEHOLDER:
-                this.header = PanelScreen.TEXT.get("PLACEHOLDER");
+
+            case INFINITE:
+
+                this.header = PanelScreen.TEXT.get("INFINITE");
+                this.description = PanelScreen.TEXT.get("INFINITE desc");
                 this.portraitImg = ImageMaster.P_LOOP;
+                this.panelImg = ImageMaster.PANEL_BG_BLUE;
+                break;
+            
+            case PLACEHOLDER:
+
+                this.header = PanelScreen.TEXT.get("PLACEHOLDER");
+                this.description = PanelScreen.TEXT.get("PLACEHOLDER desc");
+                this.portraitImg = ImageMaster.P_DAILY;
+                this.panelImg = ImageMaster.PANEL_BG_GRAY;
+                if (!GameStat.isUnlocked(GameStat.PlayMode.PLACEHOLDER)) {
+                    this.panelColor = PanelColor.GRAY; // This line will make this option become locked!
+                }
                 break;
 
             // ZIYI CHEN
@@ -106,7 +128,7 @@ public class MainPanelButton {
                 this.hb.clickStarted = true;
             }
         } else {
-            this.uiScale = MathHelper.uiLerpSnap(this.uiScale, 1.0F);
+            this.uiScale = MathHelper.cardScaleLerpSnap(this.uiScale, 1.0F);
         }
         
 
@@ -230,11 +252,56 @@ public class MainPanelButton {
         // Draw the frame
         drawPanel(sb, ImageMaster.PANEL_FRAME, false);
 
+
+        /*
+         * Display texts
+         */
+        // Render header
+        float simulatedWidth = FontHelper.getWidth(FontHelper.damageNumberFont, this.header, 0.8F);
+        if (simulatedWidth > 310.0F * DisplayConfig.scale) {
+            FontHelper.renderFontCenteredHeight(
+                sb, 
+                FontHelper.damageNumberFont, 
+                this.header,
+                this.hb.cX - 138.0F * DisplayConfig.scale, 
+                this.hb.cY + this.yMod + 294.0F * DisplayConfig.scale,
+                280.0F * DisplayConfig.scale, 
+                this.gColor, 
+                0.7F
+            );
+        } else {
+            FontHelper.renderFontCenteredHeight(
+                sb, 
+                FontHelper.damageNumberFont, 
+                this.header,
+                this.hb.cX - 153.0F * DisplayConfig.scale, 
+                this.hb.cY + this.yMod + 294.0F * DisplayConfig.scale,
+                280.0F * DisplayConfig.scale, 
+                this.gColor, 
+                0.8F
+            );
+        }
+
+        // Render description
+        FontHelper.renderFontCenteredHeight(
+            sb, 
+            FontHelper.charDescFont, 
+            this.description,
+            this.hb.cX - 153.0F * DisplayConfig.scale, 
+            this.hb.cY + this.yMod - 130.0F * DisplayConfig.scale,
+            330.0F * DisplayConfig.scale, 
+            this.cColor
+        );
+
+        // FontHelper.renderFontCenteredHeight(sb, FontHelper.charDescFont, this.description, 
+        //         this.hb.cX - 153.0F * Settings.scale, this.hb.cY + this.yMod - 130.0F * Settings.scale, 
+        //         330.0F * Settings.scale, this.cColor);
+    
         this.hb.render(sb);
     }
 
     /**
-     * Draw the texture covering the whole area of the panel option
+     * Draw the texture covering the whole area of the option Panel
      * @param sb
      * @param panelTexture
      */
@@ -243,7 +310,7 @@ public class MainPanelButton {
         float scaledSize = this.uiScale * DisplayConfig.scale;
 
         sb.draw(
-            this.panelImg, 
+            panelTexture, 
             this.hb.cX - 256.0F, 
             this.hb.cY + this.yMod - 400.0F, 
             256.0F,

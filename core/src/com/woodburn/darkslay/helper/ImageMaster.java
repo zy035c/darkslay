@@ -35,6 +35,7 @@ public class ImageMaster {
     public static Texture PANEL_BG_BEIGE;
     public static Texture PANEL_FRAME;
 
+    /**************************************** INITIALIZE STARTS ****************************************************/
     public static void initialize() {
 
         long startTime = System.currentTimeMillis();
@@ -63,6 +64,7 @@ public class ImageMaster {
         P_STANDARD = loadImage("slay_spire/menu_ui/play_panel_ui/standard.jpg");
         P_LOOP = loadImage("slay_spire/menu_ui/play_panel_ui/loop.jpg");
         P_LOCK = loadImage("slay_spire/menu_ui/play_panel_ui/lock.png");
+        P_DAILY = loadImage("slay_spire/menu_ui/play_panel_ui/daily.jpg");
 
         PANEL_BG_BLUE = loadImage("slay_spire/menu_ui/play_panel_ui/menuPanelBlue.png");
         PANEL_BG_BEIGE = loadImage("slay_spire/menu_ui/play_panel_ui/menuPanelBeige.png");
@@ -70,6 +72,8 @@ public class ImageMaster {
         PANEL_BG_GRAY = loadImage("slay_spire/menu_ui/play_panel_ui/menuPanelGray.png");
         PANEL_FRAME = loadImage("slay_spire/menu_ui/play_panel_ui/menuPanelFrame.png");
     }
+    /**************************************** INITIALIZE ENDS ****************************************************/
+
 
     public static Texture loadImage(String imgUrl) {
 
