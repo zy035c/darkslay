@@ -16,8 +16,15 @@ import com.woodburn.darkslay.helper.InputHelper;
 import com.woodburn.darkslay.localization.UIStrings;
 import com.woodburn.darkslay.screens.MainScreen;
 
-
-public class MenuButton {
+/******************************************************************************
+ *  @author  Ziyi Chen
+ *  @version  1.0.1
+ *  @since 2023-04-04
+ *
+ *  NeowScreen...
+ *
+ ******************************************************************************/
+public class TitleButton {
 
     // private static final Logger logger = LogManager.getLogger(MenuButton.class.getName());
 
@@ -62,7 +69,7 @@ public class MenuButton {
         this.label = "ERROR";
     }
 
-    public MenuButton(ClickResult res, int index) {
+    public TitleButton(ClickResult res, int index) {
 
         highlightImg = ImageMaster.loadImage("slay_spire/menu_ui/menu_option_highlight.png");
         this.result = res;
@@ -99,6 +106,7 @@ public class MenuButton {
             // play sound
         }
 
+        // If this hitbox is hovered, change color
         if (this.hb.hovered) {
 
             this.highlightColor.a = 0.9F;
@@ -121,17 +129,18 @@ public class MenuButton {
         if (this.hb.clicked) {
             this.hb.clicked = false;
             clickEffect();
-
             MainScreen.titleScreen.hideMenuButtons();
         }
 
 
     }
 
+    // the effect takes place when the play button is clicked
     private void clickEffect() {
         switch (this.result) {
             case PLAY:
-                MainScreen.neowScreen.open();
+                // hide();
+                MainScreen.panelScreen.open();
                 break;
         }
     }
@@ -144,7 +153,7 @@ public class MenuButton {
     }
 
 
-    // MATH HELPERS!!
+    // MATH HELPERS
     public static float uiLerpSnap(float x, float targetX) {
         if (x != targetX) {
             x = MathUtils.lerp(x, targetX, Gdx.graphics.getDeltaTime() * 9.0F);
@@ -211,6 +220,7 @@ public class MenuButton {
                 Settings.CREAM_COLOR
         );
 
+        // debug mode?
         // this.hb.render(sb);
     }
 

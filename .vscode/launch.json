@@ -1,0 +1,38 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "DesktopLauncher",
+            "request": "launch",
+            "mainClass": "com.woodburn.darkslay.DesktopLauncher",
+            "projectName": "Dark-Slay-22-10-22-desktop",
+            "vmArgs": "-XstartOnFirstThread"
+        },
+        {
+            "type": "java",
+            "name": "DropGameLauncher",
+            "request": "launch",
+            "mainClass": "com.woodburn.darkslay.DropGameLauncher",
+            "projectName": "Dark-Slay-22-10-22-desktop"
+        },
+        {
+            "type": "java",
+            "name": "IOSLauncher",
+            "request": "launch",
+            "mainClass": "com.woodburn.darkslay.IOSLauncher",
+            "projectName": "Dark-Slay-22-10-22-ios"
+        }
+    ]
+}

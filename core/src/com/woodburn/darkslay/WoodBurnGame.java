@@ -11,9 +11,10 @@ import com.woodburn.darkslay.creatures.AbstractPlayer;
 import com.woodburn.darkslay.dungeons.AbstractDungeon;
 import com.woodburn.darkslay.global_config.DisplayConfig;
 import com.woodburn.darkslay.helper.FontHelper;
+import com.woodburn.darkslay.helper.ImageMaster;
 import com.woodburn.darkslay.helper.InputHelper;
 import com.woodburn.darkslay.screens.MainScreen;
-import com.woodburn.darkslay.screens.TitleScreen;
+import com.woodburn.darkslay.screens.views.title.TitleScreen;
 
 public class WoodBurnGame implements ApplicationListener {
 
@@ -39,6 +40,7 @@ public class WoodBurnGame implements ApplicationListener {
         DisplayConfig.initialize();
         FontHelper.initialize();
         InputHelper.initialize();
+        ImageMaster.initialize();
 
         this.camera = new OrthographicCamera(
                 Gdx.graphics.getWidth(),

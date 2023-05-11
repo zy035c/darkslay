@@ -26,7 +26,7 @@ public class TitleBackground {
 
     public TitleBackground() {
         if (atlas == null) {
-            atlas = new TextureAtlas(Gdx.files.internal("slay_spire/title/title.atlas"));
+            atlas = new TextureAtlas(Gdx.files.internal("slay_spire/menu_ui/title/title.atlas"));
         }
 
         this.sky = atlas.findRegion("jpg/sky");

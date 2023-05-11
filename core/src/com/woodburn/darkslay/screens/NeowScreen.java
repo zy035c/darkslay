@@ -14,10 +14,20 @@ import com.woodburn.darkslay.helper.FontHelper;
 import com.woodburn.darkslay.helper.ImageMaster;
 import com.woodburn.darkslay.helper.InputHelper;
 import com.woodburn.darkslay.screens.views.event.SpeechWord;
-import com.woodburn.darkslay.screens.views.title.MenuButton;
+import com.woodburn.darkslay.screens.views.title.TitleButton;
 import com.woodburn.darkslay.screens.views.title.TitleBackground;
+import com.woodburn.darkslay.screens.MainScreen;
 
 import java.util.Scanner;
+
+/******************************************************************************
+ *  @author  Ziyi Chen
+ *  @version  1.0.1
+ *  @since 2023-04-04
+ *
+ *  NeowScreen...
+ *
+ ******************************************************************************/
 
 public class NeowScreen {
 
@@ -27,7 +37,7 @@ public class NeowScreen {
     private int currentDialog = 0;
     private int clickCount = 0;
 
-    Array<MenuButton> buttons = new Array<>();
+    Array<TitleButton> buttons = new Array<>();
 
     public TitleBackground bg = new TitleBackground();
 
@@ -61,6 +71,8 @@ public class NeowScreen {
         curLine = 0;
         this.currentDialog = 0;
         this.clickCount = 0;
+
+        MainScreen.curScreen = MainScreen.ScreenOption.Neow;
 
 //        this.eye1 = new NeowEye(0);
 //        this.eye2 = new NeowEye(1);

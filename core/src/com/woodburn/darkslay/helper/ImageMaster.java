@@ -10,7 +10,7 @@ public class ImageMaster {
     // private static final Logger logger = LogManager.getLogger(ImageMaster.class.getName());
 
 
-     public static TextureAtlas vfxAtlas;
+    public static TextureAtlas vfxAtlas;
 
     public static TextureAtlas.AtlasRegion ATK_SLASH_H;
     public static TextureAtlas.AtlasRegion ATK_SLASH_V;
@@ -18,7 +18,26 @@ public class ImageMaster {
 
     public static Texture WHITE_SQUARE_IMG;
 
+
+
+
+    /**
+     * Add on May 10, for main screen panels
+     */
+    public static Texture P_STANDARD;
+    public static Texture P_LOOP;
+    public static Texture P_DAILY;
+    public static Texture P_LOCK;
+
+    public static Texture PANEL_BG_GRAY;
+    public static Texture PANEL_BG_BLUE;
+    public static Texture PANEL_BG_RED;
+    public static Texture PANEL_BG_BEIGE;
+    public static Texture PANEL_FRAME;
+
     public static void initialize() {
+
+        long startTime = System.currentTimeMillis();
 
         vfxAtlas = new TextureAtlas(Gdx.files.internal("slay_spire/battle_ui/vfx/vfx.atlas"));
 
@@ -36,8 +55,20 @@ public class ImageMaster {
 
         // DEBUG HITBOX
 
-        WHITE_SQUARE_IMG = new Texture("slay_spire/other/whiteSquare32.png");
+        WHITE_SQUARE_IMG = loadImage("slay_spire/other/whiteSquare32.png", false);
 
+        /**
+         * Add on May 10, for main screen panels
+         */
+        P_STANDARD = loadImage("slay_spire/menu_ui/play_panel_ui/standard.jpg");
+        P_LOOP = loadImage("slay_spire/menu_ui/play_panel_ui/loop.jpg");
+        P_LOCK = loadImage("slay_spire/menu_ui/play_panel_ui/lock.png");
+
+        PANEL_BG_BLUE = loadImage("slay_spire/menu_ui/play_panel_ui/menuPanelBlue.png");
+        PANEL_BG_BEIGE = loadImage("slay_spire/menu_ui/play_panel_ui/menuPanelBeige.png");
+        PANEL_BG_RED = loadImage("slay_spire/menu_ui/play_panel_ui/menuPanelRed.png");
+        PANEL_BG_GRAY = loadImage("slay_spire/menu_ui/play_panel_ui/menuPanelGray.png");
+        PANEL_FRAME = loadImage("slay_spire/menu_ui/play_panel_ui/menuPanelFrame.png");
     }
 
     public static Texture loadImage(String imgUrl) {
@@ -49,7 +80,8 @@ public class ImageMaster {
             retVal.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
             return retVal;
         } catch (Exception e) {
-            // logger.info("[WARNING] No image at " + imgUrl);
+            // Logger.info("[WARNING] No image at " + imgUrl);
+            System.out.println("[WARNING] No image at " + imgUrl);
             return null;
         }
     }
@@ -71,6 +103,7 @@ public class ImageMaster {
             return retVal;
         } catch (Exception e) {
             // logger.info("[WARNING] No image at " + imgUrl);
+            System.out.println("[WARNING] No image at " + imgUrl);
             return null;
         }
     }
