@@ -47,9 +47,6 @@ public class TitleScreen {
     public void update() {
         this.bg.update();
         for (TitleButton btn : buttons) btn.update();
-
-        
-
     }
 
     /**

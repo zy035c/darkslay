@@ -54,6 +54,9 @@ public class FontHelper {
     // title/main menu button font
     public static BitmapFont buttonLabelFont;
 
+    /* Add on May 13 | Used for chara descript in chara_select */
+    public static BitmapFont tipHeaderFont;
+    public static BitmapFont bannerNameFont;
 
     static FreeTypeFontGenerator.FreeTypeFontParameter param = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
@@ -62,6 +65,7 @@ public class FontHelper {
     public static void initialize() {
 
         // long startTime = System.currentTimeMillis();
+
         HashMap<Character, Integer> paramCreator = new HashMap<>();
 
         switch (Settings.language) {
@@ -74,10 +78,10 @@ public class FontHelper {
 
         float size = 30.0F;
 
+        param.hinting = FreeTypeFontGenerator.Hinting.Slight;
 
-        //
-        // Title screen button
-        //
+
+        /* Title screen button */
         param.gamma = 1.2F;
         param.incremental = true;
         param.spaceX = (int)(-2.5F * DisplayConfig.scale);
@@ -89,9 +93,6 @@ public class FontHelper {
 
         buttonLabelFont = prepFont(34.0F, true);
 
-        //
-        //
-        //
 
         /*
          * For damageNumberFont. 
@@ -124,6 +125,36 @@ public class FontHelper {
         param.borderGamma = 1.8F;
         param.shadowOffsetX = (int) (6.0F * DisplayConfig.scale);
         charTitleFont = prepFont(44.0F, false);
+
+
+        /* Add on May 13 | Used for chara descript in chara_select */
+        param.shadowOffsetX = 2;
+        param.shadowOffsetY = 2;
+        param.shadowColor = new Color(0.0F, 0.0F, 0.0F, 0.33F);
+        param.gamma = 2.0F;
+        param.borderGamma = 2.0F;
+        param.borderStraight = true;
+        param.borderColor = Color.DARK_GRAY;
+        param.borderWidth = 2.0F * DisplayConfig.scale;
+
+        param.shadowOffsetX = 1;
+        param.shadowOffsetY = 1;
+        tipHeaderFont = prepFont(23.0F, false);
+
+        /* For chara select | Add on May 13 | Used for chara descript in chara_select */
+        param.gamma = 0.5F;
+        param.borderGamma = 0.5F;
+        param.shadowOffsetX = 0;
+        param.shadowOffsetY = 0;
+        param.borderWidth = 6.0F * DisplayConfig.scale;
+        param.borderColor = new Color(0.0F, 0.0F, 0.0F, 0.5F);
+        param.spaceX = (int) (-5.0F * DisplayConfig.scale);
+        // dungeonTitleFont = prepFont(115.0F, true);
+        // dungeonTitleFont.getData().setScale(1.25F);
+        param.borderWidth = 4.0F * DisplayConfig.scale;
+        param.borderColor = new Color(0.0F, 0.0F, 0.0F, 0.33F);
+        param.spaceX = (int) (-2.0F * DisplayConfig.scale);
+        bannerNameFont = prepFont(72.0F, true);
 
     }
     /**************************************** INITIALIZE ENDS ****************************************************/

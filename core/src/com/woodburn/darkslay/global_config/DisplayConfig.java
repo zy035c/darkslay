@@ -1,5 +1,8 @@
 package com.woodburn.darkslay.global_config;
 
+/**
+ * The display by default is 1280 x 720 (16 : 9).
+ */
 public class DisplayConfig {
 
     private static final int DEFAULT_W = 1280;
@@ -21,7 +24,8 @@ public class DisplayConfig {
 
         scale = WIDTH / 1920.0F;
 
-        xScale = WIDTH / 1920.0F;
+        xScale = scale;
+        yScale = scale;
 
     }
 

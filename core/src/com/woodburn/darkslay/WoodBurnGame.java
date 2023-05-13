@@ -18,6 +18,13 @@ import com.woodburn.darkslay.screens.views.title.TitleScreen;
 
 public class WoodBurnGame implements ApplicationListener {
 
+
+    /*
+     * 
+     * The regexp:  \/\*\s*\d*\s*\*\/
+     * 
+     */
+
     public static String VERSION_NUM = "[V1.0.0] (11-00-2022)";
     private OrthographicCamera camera;
     public static FitViewport viewport;
@@ -30,6 +37,8 @@ public class WoodBurnGame implements ApplicationListener {
     public static String playerName;
 
     public static MainScreen mainScreen;
+
+    public boolean trial = true;
 
 
     @Override

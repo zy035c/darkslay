@@ -35,6 +35,28 @@ public class ImageMaster {
     public static Texture PANEL_BG_BEIGE;
     public static Texture PANEL_FRAME;
 
+    /**
+     * Add on May 13, character images
+     */
+    public static Texture IRONCLAD_BTN;
+    public static Texture IRONCLAD_FULL;
+    public static Texture SILENT_BTN;
+    public static Texture SILENT_FULL;
+    public static Texture CROW_BTN;
+    public static Texture WATCHER_BTN;
+    public static Texture WATCHER_FULL;
+    public static Texture CHARA_SELECT_HIGHLIGHT_BTN;
+    public static Texture CHARA_SELECT_MORE_HIGHLIGHT_BTN;
+
+    /*
+     * Add on May 13. Game elements (gold, health..) UI icons
+     */
+    public static Texture GOLD_ICON;
+    public static Texture HEALTH_ICON;
+    public static Texture GOLD_BAG_ICON;
+    public static Texture BLOCK_ICON;
+
+
     /**************************************** INITIALIZE STARTS ****************************************************/
     public static void initialize() {
 
@@ -58,7 +80,7 @@ public class ImageMaster {
 
         WHITE_SQUARE_IMG = loadImage("slay_spire/other/whiteSquare32.png", false);
 
-        /**
+        /*
          * Add on May 10, for main screen panels
          */
         P_STANDARD = loadImage("slay_spire/menu_ui/play_panel_ui/standard.jpg");
@@ -71,6 +93,31 @@ public class ImageMaster {
         PANEL_BG_RED = loadImage("slay_spire/menu_ui/play_panel_ui/menuPanelRed.png");
         PANEL_BG_GRAY = loadImage("slay_spire/menu_ui/play_panel_ui/menuPanelGray.png");
         PANEL_FRAME = loadImage("slay_spire/menu_ui/play_panel_ui/menuPanelFrame.png");
+
+        /*
+         * Add on May 13. Character images
+         */
+        IRONCLAD_BTN = loadImage("slay_spire/character/btn/ironcladButton.png");
+        IRONCLAD_FULL = loadImage("slay_spire/character/full_portrait/ironcladPortrait.jpg");
+
+        SILENT_BTN = loadImage("slay_spire/character/btn/silentButton.png");
+        SILENT_FULL = loadImage("slay_spire/character/full_portrait/silentPortrait.jpg");
+        
+        WATCHER_BTN = loadImage("slay_spire/character/btn/watcherButton.png");
+        WATCHER_FULL = loadImage("slay_spire/character/full_portrait/watcherPortrait.jpg");
+
+        CROW_BTN = loadImage("slay_spire/character/btn/crowbotButton.png");
+
+        CHARA_SELECT_HIGHLIGHT_BTN = loadImage("slay_spire/character/btn/highlightButton.png");
+        CHARA_SELECT_MORE_HIGHLIGHT_BTN = loadImage("slay_spire/character/btn/highlightButton2.png");
+
+        /*
+         * Add on May 13. Game elements (gold, health..) UI icons
+         */
+        HEALTH_ICON = loadImage("slay_spire/tiny_icons/heart.png");
+        GOLD_ICON = loadImage("slay_spire/tiny_icons/gold.png");
+
+
     }
     /**************************************** INITIALIZE ENDS ****************************************************/
 

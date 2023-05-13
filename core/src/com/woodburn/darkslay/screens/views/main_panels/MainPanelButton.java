@@ -16,6 +16,7 @@ import com.woodburn.darkslay.helper.ImageMaster;
 import com.woodburn.darkslay.helper.InputHelper;
 import com.woodburn.darkslay.helper.MathHelper;
 import com.woodburn.darkslay.screens.MainScreen;
+import com.woodburn.drop_game.MainMenuScreen;
 
 /******************************************************************************
  * @author Ziyi Chen
@@ -142,7 +143,18 @@ public class MainPanelButton {
         animatePanelIn();
     }
 
-    private void buttonEffect() {}
+    /**
+     * The result, next screen that should be displayed. 
+     */
+    private void buttonEffect() {
+        switch (this.result) {
+            case PLAY_NORMAL:
+                MainScreen.charaSelectScreen.open();
+                break;
+
+            
+        }
+    }
 
 
     /**

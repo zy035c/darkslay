@@ -79,13 +79,13 @@ public class TitleButton {
         this.index = index;
 
         this.hb = new HitBox(
-                FontHelper.getSmartWidth(FontHelper.buttonLabelFont, this.label, 9999.0F, 1.0F) + 100.0F * DisplayConfig.scale,
-                SPACE_Y
+            FontHelper.getSmartWidth(FontHelper.buttonLabelFont, this.label, 9999.0F, 1.0F) + 100.0F * DisplayConfig.scale,
+            SPACE_Y
         );
 
         this.hb.move(
-                this.hb.width / 2.0F + 75.0F * DisplayConfig.scale,
-                START_Y + index * SPACE_Y
+            this.hb.width / 2.0F + 75.0F * DisplayConfig.scale,
+            START_Y + index * SPACE_Y
         );
 
     }

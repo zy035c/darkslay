@@ -38,4 +38,7 @@ public class MainCancelButton {
 	public void hide() {
 	}
 
+    public void show() {
+    }
+
 }

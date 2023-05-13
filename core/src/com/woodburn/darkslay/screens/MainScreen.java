@@ -2,6 +2,7 @@ package com.woodburn.darkslay.screens;
 
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.woodburn.darkslay.screens.views.character_panels.CharaSelectScreen;
 import com.woodburn.darkslay.screens.views.main_panels.PanelScreen;
 import com.woodburn.darkslay.screens.views.title.TitleScreen;
 
@@ -21,9 +22,10 @@ public class MainScreen {
     public static TitleScreen titleScreen = new TitleScreen();
     public static NeowScreen neowScreen = new NeowScreen();
     public static PanelScreen panelScreen = new PanelScreen();
+    public static CharaSelectScreen charaSelectScreen = new CharaSelectScreen();
 
     public enum ScreenOption {
-        Title, Neow, Battle, Panel
+        Title, Neow, Battle, Panel, CharaSelect;
     }
 
     public static ScreenOption curScreen;
@@ -39,11 +41,16 @@ public class MainScreen {
         switch (this.curScreen) { 
 
             case Panel:
-            // if the current screen is a panel screen, do sth
-
+                // if the current screen is a panel screen, do sth
                 panelScreen.update();
                 break;
 
+            case CharaSelect:
+                charaSelectScreen.update();
+                break;
+
+            default:
+                /* */
         }
 
     }
@@ -52,6 +59,10 @@ public class MainScreen {
         titleScreen.render(sb);
         if (curScreen == ScreenOption.Panel) {
             panelScreen.render(sb);
+        }
+
+        if (curScreen == ScreenOption.CharaSelect) {
+            charaSelectScreen.render(sb);
         }
     }
 
