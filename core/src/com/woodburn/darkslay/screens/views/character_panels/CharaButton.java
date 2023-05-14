@@ -12,6 +12,7 @@ import com.woodburn.darkslay.helper.HitBox;
 import com.woodburn.darkslay.helper.ImageMaster;
 import com.woodburn.darkslay.helper.InputHelper;
 import com.woodburn.darkslay.helper.MathHelper;
+import com.woodburn.darkslay.localization.UIStrings;
 import com.woodburn.darkslay.screens.MainScreen;
 import com.woodburn.darkslay.creatures.characters.Character;
 
@@ -67,12 +68,17 @@ public class CharaButton {
                 this.selected = true;
                 MainScreen.charaSelectScreen.justSelected();
 
+
+                /* enable confirm button */
+                MainScreen.charaSelectScreen.confirmButton.isDisabled = false;
+                String startGameString = UIStrings.getStringByPath("ui/startGame");
+                MainScreen.charaSelectScreen.confirmButton.show(startGameString);
+
+
                 // CharaSelectScreen.confirmButton.show();
 
                 MainScreen.charaSelectScreen.bgCharImg = this.character.portraitImg;
 
-                /* enable confirm button */
-                MainScreen.charaSelectScreen.bgCharImg = this.character.portraitImg;
             }
         }
 

@@ -63,6 +63,9 @@ public class ImageMaster {
     public static Texture CANCEL_BUTTON;
     public static Texture CANCEL_BUTTON_OUTLINE;
     public static Texture CANCEL_BUTTON_SHADOW;
+    public static Texture CONFIRM_BUTTON;
+    public static Texture CONFIRM_BUTTON_OUTLINE;
+    public static Texture CONFIRM_BUTTON_SHADOW;
 
     /**************************************** INITIALIZE STARTS ****************************************************/
     public static void initialize() {
@@ -131,6 +134,9 @@ public class ImageMaster {
         CANCEL_BUTTON = loadImage("slay_spire/btn_reused/cancelButton.png");
         CANCEL_BUTTON_OUTLINE = loadImage("slay_spire/btn_reused/cancelButtonOutline.png");
         CANCEL_BUTTON_SHADOW = loadImage("slay_spire/btn_reused/cancelButtonShadow.png");
+        CONFIRM_BUTTON = loadImage("slay_spire/btn_reused/confirmButton.png");
+        CONFIRM_BUTTON_OUTLINE = loadImage("slay_spire/btn_reused/confirmButtonOutline.png");
+        CONFIRM_BUTTON_SHADOW = loadImage("slay_spire/btn_reused/confirmButtonShadow.png");
     }
     /**************************************** INITIALIZE ENDS ****************************************************/
 

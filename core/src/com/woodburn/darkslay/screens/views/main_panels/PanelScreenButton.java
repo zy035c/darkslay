@@ -85,7 +85,8 @@ public class PanelScreenButton {
                 this.header = PanelScreen.TEXT.get("PLAY_NORMAL");
                 this.description = PanelScreen.TEXT.get("PLAY_NORMAL desc");
                 this.portraitImg = ImageMaster.P_STANDARD;
-                this.panelColor = PanelColor.BEIGE;
+                this.panelColor = PanelColor.RED;
+                this.panelImg = ImageMaster.PANEL_BG_RED;
                 // beige background by default
                 break;
 

@@ -12,6 +12,7 @@ import com.woodburn.darkslay.helper.FontHelper;
 import com.woodburn.darkslay.helper.MathHelper;
 import com.woodburn.darkslay.localization.UIStrings;
 import com.woodburn.darkslay.screens.MainScreen;
+import com.woodburn.darkslay.screens.reused.ConfirmButton;
 
 public class CharaSelectScreen {
     
@@ -29,6 +30,9 @@ public class CharaSelectScreen {
 
         String backTextString = UIStrings.getStringByPath("ui/cancel");
         MainScreen.cancelButton.show(backTextString);
+
+        /* This will overwrite old confirmButton */
+        confirmButton = new ConfirmButton(); 
 
         this.options.clear();
         this.options.add(new CharaButton(PlayerClass.Ironclad));
@@ -53,6 +57,9 @@ public class CharaSelectScreen {
 
     boolean anySelected;
 
+    /* The button to start game !!! */
+    public ConfirmButton confirmButton;
+    String confirmText = UIStrings.getStringByPath("ui/confirm");
 
     public void update() {
 
@@ -67,13 +74,15 @@ public class CharaSelectScreen {
             }
         }
 
-        /* Cancel Button Handler */
+        /* 
+         *  Cancel Button Handler 
+         */
         MainScreen.cancelButton.update();
         if (MainScreen.cancelButton.hb.clicked) {
             // MainScreen.superDarken = false; /* Not really necce */
             // InputHelper.pressedEscape = false;
             MainScreen.cancelButton.clickedTail("CharaSelectScreen");
-            
+
             MainScreen.panelScreen.open();
             
             /* Reset current Screen */
@@ -82,13 +91,25 @@ public class CharaSelectScreen {
             this.anySelected = false;          
         }
 
-
         if (this.anySelected) {
             this.bgCharColor.a = MathHelper.fadeLerpSnap(this.bgCharColor.a, 1.0F);
             this.bg_y_offset = MathHelper.fadeLerpSnap(this.bg_y_offset, -0.0F);
         } else {
             this.bgCharColor.a = MathHelper.fadeLerpSnap(this.bgCharColor.a, 0.0F);
         }
+
+
+        /* 
+         *  Confirm Button Handler 
+         */
+        this.confirmButton.update();
+        if (this.confirmButton.hb.clicked) {
+            this.confirmButton.clickedTail("CharaSelectScreen");
+
+            this.confirmButton.isDisabled = true; /* Cannot click many times */
+             
+        }
+
 
         // MainScreen.superDarken = this.anySelected;
     }
@@ -129,7 +150,9 @@ public class CharaSelectScreen {
                 false
             );
         } /* if ends */
+        
         MainScreen.cancelButton.render(sb);
+        this.confirmButton.render(sb);
         
         for (CharaButton c : this.options) {
             c.render(sb);
@@ -147,6 +170,8 @@ public class CharaSelectScreen {
                 1.2F    
             );
         // }
+
+        sb.setColor(Color.WHITE); /* Resume color */
 
     }
 
