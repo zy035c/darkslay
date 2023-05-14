@@ -142,6 +142,13 @@ public class TitleButton {
                 // hide();
                 MainScreen.panelScreen.open();
                 break;
+
+            case QUIT:
+                Gdx.app.exit();
+                break;
+
+            default:
+                System.out.println("[TitleButton] unsupported options");
         }
     }
 

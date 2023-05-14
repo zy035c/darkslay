@@ -1,4 +1,4 @@
-package com.woodburn.darkslay.screens;
+package com.woodburn.darkslay.screens.reused;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -13,8 +13,10 @@ import com.woodburn.darkslay.helper.HitBox;
 import com.woodburn.darkslay.helper.ImageMaster;
 import com.woodburn.darkslay.helper.InputHelper;
 import com.woodburn.darkslay.localization.UIStrings;
+import com.woodburn.darkslay.screens.MainScreen;
+import com.woodburn.darkslay.screens.MainScreen.ScreenOption;
 
-public class MainCancelButton {
+public class CancelButton {
 
     private static final String uiString = UIStrings.getStringByPath("ui/cancel");
 
@@ -44,7 +46,7 @@ public class MainCancelButton {
 
     public HitBox hb = new HitBox(0.0F, 0.0F, HITBOX_W, HITBOX_H);
 
-    public MainCancelButton() {
+    public CancelButton() {
         this.hb.move(SHOW_X - 106.0F * DisplayConfig.scale, DRAW_Y + 60.0F * DisplayConfig.scale);
     }
 
@@ -67,12 +69,6 @@ public class MainCancelButton {
 
                 // AbstractDungeon.screenSwap = false;
                 // InputHelper.pressedEscape = false;
-                this.hb.clicked = false;
-                hide();
-
-
-                /* "Back" logic */
-                resultHandler();
 
                 /*
                 if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.MAP) {
@@ -108,7 +104,7 @@ public class MainCancelButton {
             }
         }
 
-        /* interpolation on x */
+        /* Interpolation on x */
         if (this.current_x != this.target_x) {
             this.current_x = MathUtils.lerp(this.current_x, this.target_x, Gdx.graphics.getDeltaTime() * 9.0F);
             if (Math.abs(this.current_x - this.target_x) < Settings.UI_SNAP_THRESHOLD) {
@@ -117,40 +113,20 @@ public class MainCancelButton {
         }
     }
 
-    private void resultHandler() {
-
-        this.hb.clicked = false;
-        if (MainScreen.curScreen == MainScreen.ScreenOption.CharaSelect) {
-            MainScreen.panelScreen.open();
-        } else if (MainScreen.curScreen == MainScreen.ScreenOption.Panel) {
-            MainScreen.panelScreen.hide();
-            MainScreen.curScreen = MainScreen.ScreenOption.Title;
+    /**
+     * Tail of clicking on CancelButton, no matter what invoker.
+     * Should hide btn and reset booleans. 
+     * @param className
+     */
+    public void clickedTail(String className) {
+        if (this.hb.clicked && this.current_x != HIDE_X) {
+            this.hb.clicked = false;
+            this.hb.clickStarted = false;
+            hide();
+        } else {
+            System.out.println("[WARNING] Invalid call on cancelButton.clickedTail() from " + className);
         }
         
-
-        // if (CardCrawlGame.mode == CardCrawlGame.GameMode.CHAR_SELECT) {
-        //     this.hb.clicked = false;
-
-        //     if (CardCrawlGame.mainMenuScreen.statsScreen.screenUp) {
-        //         CardCrawlGame.mainMenuScreen.statsScreen.hide();
-        //         return;
-        //     }
-        //     if (CardCrawlGame.mainMenuScreen.isSettingsUp) {
-        //         CardCrawlGame.mainMenuScreen.lighten();
-        //         CardCrawlGame.mainMenuScreen.isSettingsUp = false;
-        //         CardCrawlGame.mainMenuScreen.screen = MainMenuScreen.CurScreen.MAIN_MENU;
-
-        //         if (!CardCrawlGame.mainMenuScreen.panelScreen.panels.isEmpty()) {
-        //             CardCrawlGame.mainMenuScreen.panelScreen.open(MenuPanelScreen.PanelScreen.SETTINGS);
-        //         }
-        //         hide();
-        //         return;
-        //     }
-
-            // if (this.buttonText.equals(TEXT[0])) {
-            //     return;
-            // }
-        // }
     }
 
     private void updateGlow() {
@@ -225,6 +201,7 @@ public class MainCancelButton {
         if (this.hb.hovered && !this.hb.clickStarted) {
             sb.setBlendFunction(770, 1);
             sb.setColor(HOVER_BLEND_COLOR);
+            /* Render button highlight when hovered */
             renderThings(ImageMaster.CANCEL_BUTTON, sb);
             sb.setBlendFunction(770, 771);
         }
@@ -246,6 +223,8 @@ public class MainCancelButton {
         if (!this.isHidden) {
             this.hb.render(sb);
         }
+
+        sb.setColor(Color.WHITE); /* resume color */
     }
 
     private void renderThings(Texture t, SpriteBatch sb) {

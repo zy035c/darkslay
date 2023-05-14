@@ -20,16 +20,32 @@ public class HitBox {
     public float cX;
     public float cY;
 
+    /**
+     * Create HitBox with designated width and height
+     * @param width
+     * @param height
+     */
     public HitBox(float width, float height) {
-        this.width = width;
-        this.height = height;
-
-        cX = x + this.width / 2.0F;
-        cY = y + this.height / 2.0F;
+        this(-10000.0F, -10000.0F, width, height);
     }
 
-
-    public HitBox(float f, float g, float hitboxW, float hitboxH) {
+    /**
+     * Create HitBox with designated width and height
+     * at location x, y
+     * 
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
+    public HitBox(float x, float y, float w, float h) {
+        this.x = x;
+        this.y = y;
+        this.width = w;
+        this.height = h;
+        
+        cX = x + this.width / 2.0F;
+        cY = y + this.height / 2.0F;
     }
 
 

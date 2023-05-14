@@ -7,8 +7,9 @@ import java.util.Map;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.woodburn.darkslay.global_config.DisplayConfig;
 import com.woodburn.darkslay.helper.InputHelper;
-import com.woodburn.darkslay.screens.MainCancelButton;
+import com.woodburn.darkslay.localization.UIStrings;
 import com.woodburn.darkslay.screens.MainScreen;
+import com.woodburn.darkslay.screens.reused.CancelButton;
 import com.woodburn.drop_game.MainMenuScreen;
 
 /******************************************************************************
@@ -16,7 +17,7 @@ import com.woodburn.drop_game.MainMenuScreen;
  *  @version  1.0.1
  *  @since 2023-04-04
  *
- *  Screen that opens up when you click the play
+ *  Gamemode select Screen, opens up when you click the play
  *
  ******************************************************************************/
 
@@ -26,17 +27,19 @@ public class PanelScreen {
         Call when its opened.
         At last, mainScreen.screenOption will be set to panelScreen
         so update() of this class will be called instead the update()
-        of another class
+        of another screen class
     */ 
     public void open() {
-        initializePanels();
         MainScreen.curScreen = MainScreen.ScreenOption.Panel;
-        MainScreen.cancelButton.show("Back");
+        initializePanels();
+
+        String backTextString = UIStrings.getStringByPath("ui/cancel");
+        MainScreen.cancelButton.show(backTextString);
         MainScreen.titleScreen.darken();
     }
 
 
-    public ArrayList<MainPanelButton> panels = new ArrayList<>();
+    public ArrayList<PanelScreenButton> panels = new ArrayList<>();
     
     /**
      * The hashmap that stores the name of different play mode and their text.
@@ -49,16 +52,15 @@ public class PanelScreen {
     public void initializePanels() {
 
         TEXT = new HashMap<>();
-        
         initText();
         
-        // this.panels.clear();
+        this.panels.clear();
 
         /* */
         this.panels.add(
-            new MainPanelButton(
-                MainPanelButton.MainPanelResult.PLAY_NORMAL, 
-                MainPanelButton.PanelColor.GRAY, 
+            new PanelScreenButton(
+                PanelScreenButton.MainPanelResult.PLAY_NORMAL, 
+                PanelScreenButton.PanelColor.GRAY, 
                 DisplayConfig.WIDTH / 2.0F - (450F * DisplayConfig.scale), 
                 PANEL_Y
             )
@@ -66,9 +68,9 @@ public class PanelScreen {
 
         /* */
         this.panels.add(
-            new MainPanelButton(
-                MainPanelButton.MainPanelResult.PLACEHOLDER, 
-                MainPanelButton.PanelColor.RED, 
+            new PanelScreenButton(
+                PanelScreenButton.MainPanelResult.PLACEHOLDER, 
+                PanelScreenButton.PanelColor.RED, 
                 DisplayConfig.WIDTH / 2.0F, 
                 PANEL_Y
             )
@@ -76,9 +78,9 @@ public class PanelScreen {
 
         /* */
         this.panels.add(
-            new MainPanelButton(
-                MainPanelButton.MainPanelResult.INFINITE, 
-                MainPanelButton.PanelColor.BLUE, 
+            new PanelScreenButton(
+                PanelScreenButton.MainPanelResult.INFINITE, 
+                PanelScreenButton.PanelColor.BLUE, 
                 DisplayConfig.WIDTH / 2.0F + (450F * DisplayConfig.scale), 
                 PANEL_Y
             )
@@ -86,6 +88,7 @@ public class PanelScreen {
     }
 
     /**
+     * Wait for update: get from localization.
      * Init the HashMap to store words for panels
      * Might be modified for future language pack
      */
@@ -104,32 +107,27 @@ public class PanelScreen {
 
         MainScreen.cancelButton.update();
 
-        // if cancel button is clicked...
+        /* Cancel button handler */
         if (MainScreen.cancelButton.hb.clicked) {
             // InputHelper.pressedEscape = false;
-            MainScreen.cancelButton.hide();
             MainScreen.curScreen = MainScreen.ScreenOption.Title;
             MainScreen.titleScreen.lighten();
+            MainScreen.cancelButton.clickedTail("Panel Screen");
         }
 
-        // call update of all buttons
-        for (MainPanelButton panel: this.panels) {
+        /* Call update of all buttons */
+        for (PanelScreenButton panel: this.panels) {
             panel.update();
         }
 
     }
 
     public void render(SpriteBatch sb) {
-        for (MainPanelButton panel: this.panels) {
+        for (PanelScreenButton panel: this.panels) {
             panel.render(sb);
         }
 
         MainScreen.cancelButton.render(sb);
     }
-
-    public void hide() {
-    }
-
-    public void refresh() {}
 
 }

@@ -10,6 +10,7 @@ import com.woodburn.darkslay.global_config.DisplayConfig;
 import com.woodburn.darkslay.global_config.Settings;
 import com.woodburn.darkslay.helper.FontHelper;
 import com.woodburn.darkslay.helper.MathHelper;
+import com.woodburn.darkslay.localization.UIStrings;
 import com.woodburn.darkslay.screens.MainScreen;
 
 public class CharaSelectScreen {
@@ -26,13 +27,14 @@ public class CharaSelectScreen {
 
     private void initialize() {
 
-        MainScreen.cancelButton.show("Back");
+        String backTextString = UIStrings.getStringByPath("ui/cancel");
+        MainScreen.cancelButton.show(backTextString);
 
+        this.options.clear();
         this.options.add(new CharaButton(PlayerClass.Ironclad));
         this.options.add(new CharaButton(PlayerClass.Silent));
         this.options.add(new CharaButton(PlayerClass.Seeker));
         this.options.add(new CharaButton(PlayerClass.Dragonslayer));
-
 
         /*
          * Place buttons to correct places
@@ -49,7 +51,7 @@ public class CharaSelectScreen {
     }
 
 
-    boolean anySelected = false;
+    boolean anySelected;
 
 
     public void update() {
@@ -65,7 +67,21 @@ public class CharaSelectScreen {
             }
         }
 
-        /* Deal with cancel and confirm button ... */
+        /* Cancel Button Handler */
+        MainScreen.cancelButton.update();
+        if (MainScreen.cancelButton.hb.clicked) {
+            // MainScreen.superDarken = false; /* Not really necce */
+            // InputHelper.pressedEscape = false;
+            MainScreen.cancelButton.clickedTail("CharaSelectScreen");
+            
+            MainScreen.panelScreen.open();
+            
+            /* Reset current Screen */
+            for (CharaButton b : this.options) b.selected = false;
+            this.bgCharColor.a = 0.0F;
+            this.anySelected = false;          
+        }
+
 
         if (this.anySelected) {
             this.bgCharColor.a = MathHelper.fadeLerpSnap(this.bgCharColor.a, 1.0F);
@@ -74,16 +90,7 @@ public class CharaSelectScreen {
             this.bgCharColor.a = MathHelper.fadeLerpSnap(this.bgCharColor.a, 0.0F);
         }
 
-        MainScreen.cancelButton.update();
         // MainScreen.superDarken = this.anySelected;
-
-    }
-
-    /**
-     * Update funtion of cancel AND? confirm button
-     */
-    public void updatePanels() {
-
     }
 
     public void fadeOut() {

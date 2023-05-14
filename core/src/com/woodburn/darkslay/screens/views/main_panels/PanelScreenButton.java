@@ -28,7 +28,7 @@ import com.woodburn.drop_game.MainMenuScreen;
  *        assigned location.
  *
  ******************************************************************************/
-public class MainPanelButton {
+public class PanelScreenButton {
 
     public HitBox hb = new HitBox(400.0F * DisplayConfig.scale, 700.0F * DisplayConfig.scale);
     public MainPanelResult result;
@@ -41,7 +41,7 @@ public class MainPanelButton {
      */
     public PanelColor panelColor;
 
-    public MainPanelButton(MainPanelResult r, PanelColor color, float x, float y) {
+    public PanelScreenButton(MainPanelResult r, PanelColor color, float x, float y) {
         this.result = r;
 
         this.panelColor = color;
@@ -50,7 +50,7 @@ public class MainPanelButton {
         initialize();
 
         // Control the speed of the animate-in. End is 0.35F
-        this.animTime = MathUtils.random(0.2F, 0.5F);
+        this.animTime = MathUtils.random(0.2F, 0.45F);
         this.animTimer = this.animTime;
     }
 
@@ -111,6 +111,8 @@ public class MainPanelButton {
             // ZIYI CHEN
             default: this.portraitImg = ImageMaster.P_LOCK;
         }
+
+        wColor.a = 0.0F; /* fade-in: should start at 0 */
     }
 
     private float uiScale = 1.0F;
@@ -136,7 +138,6 @@ public class MainPanelButton {
         if (this.hb.clicked) {
             this.hb.clicked = false;
             // CardCrawlGame.sound.play("DECK_OPEN");
-            MainScreen.panelScreen.hide();
             buttonEffect();
         }
 
@@ -152,7 +153,8 @@ public class MainPanelButton {
                 MainScreen.charaSelectScreen.open();
                 break;
 
-            
+            default:
+                System.out.println("Not supported game mode...");   
         }
     }
 
@@ -165,10 +167,11 @@ public class MainPanelButton {
     private Color wColor = Color.WHITE.cpy();
     private Color grColor = Color.GRAY.cpy();
 
-    private float yMod;
+    private float yMod = START_Y;
     private static final float START_Y = -100 * DisplayConfig.scale;
 
     private void animatePanelIn() {
+
         this.animTimer -= Gdx.graphics.getDeltaTime();
         if (this.animTimer < 0.0F) {
             this.animTimer = 0.0F;
@@ -180,6 +183,8 @@ public class MainPanelButton {
             this.animTimer / this.animTime
         );
 
+        /* extra logic: y shouldn't start */
+
         this.wColor.a = 1.0F - this.animTimer / this.animTime;
         this.cColor.a = this.wColor.a;
         this.gColor.a = this.wColor.a;
@@ -190,10 +195,10 @@ public class MainPanelButton {
     public void render(SpriteBatch sb) {
 
         // init sb color
-        sb.setColor(this.wColor);
+        // sb.setColor(this.wColor);
 
         // Draw the original background panelImg
-        drawPanel(sb, this.panelImg, true);
+        drawThings(sb, this.panelImg, true);
 
         if (this.hb.hovered) {
             sb.setColor(
@@ -206,7 +211,7 @@ public class MainPanelButton {
             );
             
             sb.setBlendFunction(770, 1);
-            drawPanel(sb, ImageMaster.PANEL_BG_BLUE, true);
+            drawThings(sb, ImageMaster.PANEL_BG_BLUE, true);
             sb.setBlendFunction(770, 771);
         }
 
@@ -262,7 +267,7 @@ public class MainPanelButton {
         }
 
         // Draw the frame
-        drawPanel(sb, ImageMaster.PANEL_FRAME, false);
+        drawThings(sb, ImageMaster.PANEL_FRAME, false);
 
 
         /*
@@ -305,10 +310,9 @@ public class MainPanelButton {
             this.cColor
         );
 
-        // FontHelper.renderFontCenteredHeight(sb, FontHelper.charDescFont, this.description, 
-        //         this.hb.cX - 153.0F * Settings.scale, this.hb.cY + this.yMod - 130.0F * Settings.scale, 
-        //         330.0F * Settings.scale, this.cColor);
     
+        
+        sb.setColor(Color.WHITE); /* Resume color */
         this.hb.render(sb);
     }
 
@@ -317,7 +321,7 @@ public class MainPanelButton {
      * @param sb
      * @param panelTexture
      */
-    private void drawPanel(SpriteBatch sb, Texture panelTexture, boolean scaled) {
+    private void drawThings(SpriteBatch sb, Texture panelTexture, boolean scaled) {
 
         float scaledSize = this.uiScale * DisplayConfig.scale;
 

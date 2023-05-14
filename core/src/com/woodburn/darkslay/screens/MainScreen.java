@@ -2,6 +2,7 @@ package com.woodburn.darkslay.screens;
 
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.woodburn.darkslay.screens.reused.CancelButton;
 import com.woodburn.darkslay.screens.views.character_panels.CharaSelectScreen;
 import com.woodburn.darkslay.screens.views.main_panels.PanelScreen;
 import com.woodburn.darkslay.screens.views.title.TitleScreen;
@@ -24,7 +25,7 @@ public class MainScreen {
     public static PanelScreen panelScreen = new PanelScreen();
     public static CharaSelectScreen charaSelectScreen = new CharaSelectScreen();
 
-    public static MainCancelButton cancelButton = new MainCancelButton();
+    public static CancelButton cancelButton = new CancelButton();
 
     public enum ScreenOption {
         Title, Neow, Battle, Panel, CharaSelect;

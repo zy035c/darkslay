@@ -140,8 +140,8 @@ public class CharaButton {
 
         renderInfo(sb);
 
+        sb.setColor(Color.WHITE); /* resume color */
         this.hb.render(sb);
-
     }
 
     private static final float DEST_INFO_X = 200.0F * DisplayConfig.scale;
@@ -237,7 +237,7 @@ public class CharaButton {
                 30.0F * DisplayConfig.scale, 
                 Settings.CREAM_COLOR
             );
-        }
+        } /* If ends */
     }
 
 }
