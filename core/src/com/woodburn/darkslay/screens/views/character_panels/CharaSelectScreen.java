@@ -7,21 +7,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.woodburn.darkslay.creatures.AbstractPlayer.PlayerClass;
 import com.woodburn.darkslay.global_config.DisplayConfig;
+import com.woodburn.darkslay.global_config.Settings;
 import com.woodburn.darkslay.helper.FontHelper;
 import com.woodburn.darkslay.helper.MathHelper;
 import com.woodburn.darkslay.screens.MainScreen;
-import com.woodburn.darkslay.screens.MainScreen.ScreenOption;
-import com.woodburn.darkslay.screens.views.main_panels.MainCancelButton;
-import com.woodburn.darkslay.screens.views.main_panels.MainPanelButton;
-import com.woodburn.drop_game.MainMenuScreen;
 
 public class CharaSelectScreen {
     
     public ArrayList<CharaButton> options = new ArrayList<>();
-
-    public static MainCancelButton cancelButton;
-    /** ! For tentative */
-    public static MainCancelButton confirmButton;
 
     public void open() {
         // MainScreen.ScreenOption
@@ -33,7 +26,7 @@ public class CharaSelectScreen {
 
     private void initialize() {
 
-        cancelButton = new MainCancelButton();
+        MainScreen.cancelButton.show("Back");
 
         this.options.add(new CharaButton(PlayerClass.Ironclad));
         this.options.add(new CharaButton(PlayerClass.Silent));
@@ -81,7 +74,7 @@ public class CharaSelectScreen {
             this.bgCharColor.a = MathHelper.fadeLerpSnap(this.bgCharColor.a, 0.0F);
         }
 
-
+        MainScreen.cancelButton.update();
         // MainScreen.superDarken = this.anySelected;
 
     }
@@ -106,6 +99,7 @@ public class CharaSelectScreen {
     public void render(SpriteBatch sb) {
         
         sb.setColor(this.bgCharColor); /* Prepare color */
+        /* If a chara is selcted, the bg is not null, render the chara portrait. */
         if (this.bgCharImg != null) {
 
             /* 16 : 9 */
@@ -128,20 +122,32 @@ public class CharaSelectScreen {
                 false
             );
         } /* if ends */
-        cancelButton.render(sb);
+        MainScreen.cancelButton.render(sb);
         
         for (CharaButton c : this.options) {
             c.render(sb);
         }
 
-        // FontHelper.renderFontCenteredHeight(sb, null, null, bg_y_offset, bg_y_offset, bg_y_offset, bgCharColor); 
+        /* Display msg: select your character. */
+        // if (!anySelected) {
+            FontHelper.renderFontCenteredHeight(
+                sb,
+                FontHelper.losePowerFont,
+                "Recall. Your past and your name...",
+                DisplayConfig.WIDTH / 2.0F,
+                340.0F * DisplayConfig.yScale,
+                Settings.CREAM_COLOR,
+                1.2F    
+            );
+        // }
+
     }
 
     /**
      * If a new character is selected: move the bg to outside
      */
     public void justSelected() {
-        this.bg_y_offset = 0.0F;
+        this.bg_y_offset = 10.0F;
     }
 
     public void deselectOtherOptions(CharaButton selectedBtn) {

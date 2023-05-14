@@ -28,7 +28,7 @@ public class TitleButton {
 
     // private static final Logger logger = LogManager.getLogger(MenuButton.class.getName());
 
-    private static final UIStrings uiStrings = UIStrings.getUIString("MenuButton");
+    private static final UIStrings uiStrings = UIStrings.getStr();
     private String label;
     private String[] TEXT = uiStrings.TEXT;
 

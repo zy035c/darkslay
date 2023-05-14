@@ -32,5 +32,10 @@ public class Settings {
 
     public static final Color QUARTER_TRANSPARENT_BLACK_COLOR = new Color(0.0F, 0.0F, 0.0F, 0.25F);
     public static final Color QUARTER_TRANSPARENT_WHITE_COLOR = new Color(1.0F, 1.0F, 1.0F, 0.25F);
+    /* ------------Color ends----------- */
+
+
+
+    public static final float UI_SNAP_THRESHOLD = 1.0F * DisplayConfig.scale;
 
 }

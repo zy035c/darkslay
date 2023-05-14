@@ -20,10 +20,7 @@ import com.woodburn.darkslay.helper.ImageMaster;
  */
 public class IroncladTest extends Character {
     
-    private static String[] TEXT = {
-        "Ironclad",
-        "Desc"
-    };
+    
 
     private static IroncladTest singleton;
     
@@ -32,8 +29,7 @@ public class IroncladTest extends Character {
             singleton = new IroncladTest();
 
             singleton.playerClass = PlayerClass.Ironclad;
-            singleton.nameString = TEXT[0];
-            singleton.description = TEXT[1];
+           
             singleton.startingDeck = initDeck();
 
             singleton.portraitImg = ImageMaster.IRONCLAD_FULL;

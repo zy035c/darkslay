@@ -7,6 +7,7 @@ import java.util.Map;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.woodburn.darkslay.global_config.DisplayConfig;
 import com.woodburn.darkslay.helper.InputHelper;
+import com.woodburn.darkslay.screens.MainCancelButton;
 import com.woodburn.darkslay.screens.MainScreen;
 import com.woodburn.drop_game.MainMenuScreen;
 
@@ -21,8 +22,6 @@ import com.woodburn.drop_game.MainMenuScreen;
 
 public class PanelScreen {
 
-    public MainCancelButton cancelButton = new MainCancelButton();
-
     /** 
         Call when its opened.
         At last, mainScreen.screenOption will be set to panelScreen
@@ -32,6 +31,7 @@ public class PanelScreen {
     public void open() {
         initializePanels();
         MainScreen.curScreen = MainScreen.ScreenOption.Panel;
+        MainScreen.cancelButton.show("Back");
         MainScreen.titleScreen.darken();
     }
 
@@ -102,12 +102,12 @@ public class PanelScreen {
 
     public void update() {
 
-        this.cancelButton.update();
+        MainScreen.cancelButton.update();
 
         // if cancel button is clicked...
-        if (this.cancelButton.hb.clicked) {
+        if (MainScreen.cancelButton.hb.clicked) {
             // InputHelper.pressedEscape = false;
-            this.cancelButton.hide();
+            MainScreen.cancelButton.hide();
             MainScreen.curScreen = MainScreen.ScreenOption.Title;
             MainScreen.titleScreen.lighten();
         }
@@ -124,7 +124,7 @@ public class PanelScreen {
             panel.render(sb);
         }
 
-        this.cancelButton.render(sb);
+        MainScreen.cancelButton.render(sb);
     }
 
     public void hide() {

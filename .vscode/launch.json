@@ -4,8 +4,28 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
-        
+        {
+            "type": "java",
+            "name": "Localization",
+            "request": "launch",
+            "mainClass": "com.woodburn.darkslay.localization.Localization",
+            "projectName": "Dark-Slay-22-10-22-core"
+        },
+        {
+            "type": "java",
+            "name": "localization",
+            "request": "launch",
+            "mainClass": "com.woodburn.darkslay.localization.localization",
+            "projectName": "Dark-Slay-22-10-22-core",
+            "vmArgs": "-XstartOnFirstThread"
+        },
+        {
+            "type": "java",
+            "name": "UIStrings",
+            "request": "launch",
+            "mainClass": "com.woodburn.darkslay.localization.UIStrings",
+            "projectName": "Dark-Slay-22-10-22-core"
+        },
         {
             "type": "java",
             "name": "Current File",
@@ -25,14 +45,8 @@
             "name": "DropGameLauncher",
             "request": "launch",
             "mainClass": "com.woodburn.darkslay.DropGameLauncher",
-            "projectName": "Dark-Slay-22-10-22-desktop"
-        },
-        {
-            "type": "java",
-            "name": "IOSLauncher",
-            "request": "launch",
-            "mainClass": "com.woodburn.darkslay.IOSLauncher",
-            "projectName": "Dark-Slay-22-10-22-ios"
+            "projectName": "Dark-Slay-22-10-22-desktop",
+            "vmArgs": "-XstartOnFirstThread"
         }
     ]
 }

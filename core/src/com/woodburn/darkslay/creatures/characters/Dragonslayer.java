@@ -5,10 +5,7 @@ import com.woodburn.darkslay.creatures.AbstractPlayer.PlayerClass;
 import com.woodburn.darkslay.helper.ImageMaster;
 
 public class Dragonslayer extends Character {
-    private static String[] TEXT = {
-        "Dragonslayer",
-        "Desc"
-    };
+    
 
     private static IroncladTest singleton;
     
@@ -17,8 +14,7 @@ public class Dragonslayer extends Character {
             singleton = new IroncladTest();
 
             singleton.playerClass = PlayerClass.Dragonslayer;
-            singleton.nameString = TEXT[0];
-            singleton.description = TEXT[1];
+            
             singleton.startingDeck = initDeck();
 
             singleton.portraitImg = ImageMaster.IRONCLAD_FULL;

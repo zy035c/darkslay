@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.woodburn.darkslay.cards.Deck;
 import com.woodburn.darkslay.creatures.AbstractPlayer;
 import com.woodburn.darkslay.creatures.AbstractPlayer.PlayerClass;
+import com.woodburn.darkslay.localization.UIStrings;
 
 
 /**
@@ -38,20 +39,46 @@ public abstract class Character {
      * Return the singleton of the Character that is of the playerClass
      */
     public static Character instantiate(PlayerClass p) {
+
+        Character character;
+
         switch (p) {
             case Ironclad:
-                return IroncladTest.create();
+                character = IroncladTest.create();
+                initText(character, "IroncladTest");
+                break;
+
             case Seeker:
-                return Seeker.create();
+                character = Seeker.create();
+                initText(character, "Seeker");
+                break;
+
             case Silent:
-                return Silent.create();
+                character = Silent.create();
+                initText(character, "Silent");
+                break;
+
             case Dragonslayer:
-                return Dragonslayer.create();
+                character = Dragonslayer.create();
+                initText(character, "Dragonslayer");
+                break;
 
             default:
                 System.out.println("[WARNING] Unimplemented character is requested");
                 return null;
         }
+        return character;
+    }
+
+    /**
+     * init text by localization
+     * @param c
+     * @param playerClassName
+     */
+    private static void initText(Character c, String playerClassName) {
+
+        c.nameString = UIStrings.getStringByPath("characters/" + playerClassName + "/nameString");
+        c.description = UIStrings.getStringByPath("characters/" + playerClassName + "/description");
     }
 
 

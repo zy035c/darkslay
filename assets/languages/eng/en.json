@@ -1,0 +1,33 @@
+{
+
+    "characters": {
+
+        "IroncladTest" : {
+            "nameString" : "Ironclad",
+            "description" : "The remaining soldier of the Ironclads. NL Sold his soul to harness demonic energies. NL He wields an arsenal of powerful strikes, boasts formidable defensive options, NL and draws fiendish strength from his demonic benefactors to empower himself in various ways. NL [Now available]"
+        },
+
+        "Silent" : {
+            "nameString" : "The Silent",
+            "description" : "A deadly huntress from the foglands. NL Eradicates foes with daggers and poisons. NL [NOT available]"
+        },
+
+        "Seeker" : {
+            "nameString" : "Seeker",
+            "description" : "A loner who left formal academia to pursue further research. NL Commands soul sorceries using high intelligence. NL [Soon available]"
+        },
+
+        "Dragonslayer" : {
+            "nameString" : "Dragonslayer",
+            "description" : "From the oriental... NL Mysterious dragon fighter. NL [Soon available]"
+        }
+
+    },
+
+    "ui" : {
+        "cancel" : "Back",
+        "confirm" : "Confirm",
+        "startGame" : "Awake"
+    }
+
+}

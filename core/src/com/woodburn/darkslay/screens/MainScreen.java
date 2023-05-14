@@ -24,6 +24,8 @@ public class MainScreen {
     public static PanelScreen panelScreen = new PanelScreen();
     public static CharaSelectScreen charaSelectScreen = new CharaSelectScreen();
 
+    public static MainCancelButton cancelButton = new MainCancelButton();
+
     public enum ScreenOption {
         Title, Neow, Battle, Panel, CharaSelect;
     }

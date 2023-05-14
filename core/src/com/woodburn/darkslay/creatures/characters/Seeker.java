@@ -7,10 +7,7 @@ import com.woodburn.darkslay.helper.ImageMaster;
 
 public class Seeker extends Character {
 
-    private static String[] TEXT = {
-        "Seeker",
-        "Desc"
-    };
+   
 
     private static Seeker singleton;
 
@@ -19,8 +16,7 @@ public class Seeker extends Character {
             singleton = new Seeker();
 
             singleton.playerClass = PlayerClass.Seeker;
-            singleton.nameString = TEXT[0];
-            singleton.description = TEXT[1];
+  
             singleton.startingDeck = initDeck();
 
             singleton.portraitImg = ImageMaster.WATCHER_FULL;

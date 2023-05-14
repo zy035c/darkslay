@@ -152,90 +152,92 @@ public class CharaButton {
 
     private void renderInfo(SpriteBatch sb) {
 
-        /* Render name title */
-        FontHelper.renderSmartText(
-            sb, 
-            FontHelper.bannerNameFont, 
-            this.character.nameString,
-            this.infoX - 35.0F * DisplayConfig.scale, 
-            this.infoY + NAME_OFFSET_Y, 
-            99999.0F,
-            38.0F * DisplayConfig.scale, 
-            Settings.GOLD_COLOR
-        );
+        if (this.selected) {
 
-        sb.draw(
-            ImageMaster.HEALTH_ICON, 
-            this.infoX - 10.0F * DisplayConfig.scale - 32.0F,
-            this.infoY + 95.0F * DisplayConfig.scale - 32.0F, 
-            32.0F, 
-            32.0F, 
-            64.0F, 
-            64.0F, 
-            DisplayConfig.scale,
-            DisplayConfig.scale, 
-            0.0F, 
-            0, 
-            0, 
-            64, 
-            64, 
-            false, 
-            false
-        );
+            /* Render name title */
+            FontHelper.renderSmartText(
+                sb, 
+                FontHelper.bannerNameFont, 
+                this.character.nameString,
+                this.infoX - 35.0F * DisplayConfig.scale, 
+                this.infoY + NAME_OFFSET_Y, 
+                99999.0F,
+                38.0F * DisplayConfig.scale, 
+                Settings.GOLD_COLOR
+            );
 
-        FontHelper.renderSmartText(
-            sb, 
-            FontHelper.tipHeaderFont,
-            Integer.toString(this.character.startingMaxHealth),
-            this.infoX + 18.0F * DisplayConfig.scale, 
-            this.infoY + 102.0F * DisplayConfig.scale, 
-            10000.0F, 
-            10000.0F,
-            Settings.RED_TEXT_COLOR
-        );
+            sb.draw(
+                ImageMaster.HEALTH_ICON, 
+                this.infoX - 10.0F * DisplayConfig.scale - 32.0F,
+                this.infoY + 95.0F * DisplayConfig.scale - 32.0F, 
+                32.0F, 
+                32.0F, 
+                64.0F, 
+                64.0F, 
+                DisplayConfig.scale,
+                DisplayConfig.scale, 
+                0.0F, 
+                0, 
+                0, 
+                64, 
+                64, 
+                false, 
+                false
+            );
 
-        sb.draw(
-            ImageMaster.GOLD_ICON, 
-            this.infoX + 190.0F * DisplayConfig.scale - 32.0F,
-            this.infoY + 95.0F * DisplayConfig.scale - 32.0F, 
-            32.0F, 
-            32.0F, 
-            64.0F, 
-            64.0F, 
-            DisplayConfig.scale,
-            DisplayConfig.scale,
-            0.0F, 
-            0, 
-            0, 
-            64, 
-            64, 
-            false, 
-            false
-        );
+            FontHelper.renderSmartText(
+                sb, 
+                FontHelper.tipHeaderFont,
+                Integer.toString(this.character.startingMaxHealth),
+                this.infoX + 18.0F * DisplayConfig.scale, 
+                this.infoY + 102.0F * DisplayConfig.scale, 
+                10000.0F, 
+                10000.0F,
+                Settings.RED_TEXT_COLOR
+            );
 
-        FontHelper.renderSmartText(
-            sb, 
-            FontHelper.tipHeaderFont, 
-            Integer.toString(this.character.startingGold), 
-            this.infoX + 220.0F * DisplayConfig.scale,
-            this.infoY + 102.0F * DisplayConfig.scale, 
-            10000.0F, 
-            10000.0F, 
-            Settings.GOLD_COLOR
-        );
+            sb.draw(
+                ImageMaster.GOLD_ICON, 
+                this.infoX + 190.0F * DisplayConfig.scale - 32.0F,
+                this.infoY + 95.0F * DisplayConfig.scale - 32.0F, 
+                32.0F, 
+                32.0F, 
+                64.0F, 
+                64.0F, 
+                DisplayConfig.scale,
+                DisplayConfig.scale,
+                0.0F, 
+                0, 
+                0, 
+                64, 
+                64, 
+                false, 
+                false
+            );
 
-        /* What is this? */
-        // FontHelper.renderSmartText(
-        //     sb, 
-        //     FontHelper.tipHeaderFont, 
-        //     this.flavorText,
-        //     this.infoX - 26.0F * DisplayConfig.scale, 
-        //     this.infoY + 40.0F * DisplayConfig.scale, 
-        //     10000.0F,
-        //     30.0F * DisplayConfig.scale, 
-        //     Settings.CREAM_COLOR
-        // );
+            FontHelper.renderSmartText(
+                sb, 
+                FontHelper.tipHeaderFont, 
+                Integer.toString(this.character.startingGold), 
+                this.infoX + 220.0F * DisplayConfig.scale,
+                this.infoY + 102.0F * DisplayConfig.scale, 
+                10000.0F, 
+                10000.0F, 
+                Settings.GOLD_COLOR
+            );
 
+            /* Display character description. */
+            FontHelper.renderSmartText(
+                sb, 
+                FontHelper.tipHeaderFont, 
+                this.character.description,
+                this.infoX - 26.0F * DisplayConfig.scale, 
+                this.infoY + 40.0F * DisplayConfig.scale, 
+                10000.0F,
+                30.0F * DisplayConfig.scale, 
+                Settings.CREAM_COLOR
+            );
+        }
     }
 
 }

@@ -57,6 +57,13 @@ public class ImageMaster {
     public static Texture BLOCK_ICON;
 
 
+    /*
+     * Add on May 14, few buttons and shadow
+     */
+    public static Texture CANCEL_BUTTON;
+    public static Texture CANCEL_BUTTON_OUTLINE;
+    public static Texture CANCEL_BUTTON_SHADOW;
+
     /**************************************** INITIALIZE STARTS ****************************************************/
     public static void initialize() {
 
@@ -118,6 +125,12 @@ public class ImageMaster {
         GOLD_ICON = loadImage("slay_spire/tiny_icons/gold.png");
 
 
+        /*
+         * Add on May 14, few buttons and shadow 
+         */
+        CANCEL_BUTTON = loadImage("slay_spire/btn_reused/cancelButton.png");
+        CANCEL_BUTTON_OUTLINE = loadImage("slay_spire/btn_reused/cancelButtonOutline.png");
+        CANCEL_BUTTON_SHADOW = loadImage("slay_spire/btn_reused/cancelButtonShadow.png");
     }
     /**************************************** INITIALIZE ENDS ****************************************************/
 

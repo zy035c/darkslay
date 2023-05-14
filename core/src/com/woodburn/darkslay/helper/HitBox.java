@@ -29,6 +29,10 @@ public class HitBox {
     }
 
 
+    public HitBox(float f, float g, float hitboxW, float hitboxH) {
+    }
+
+
     public void update() {
         update(this.x, this.y); // do location update
         // below is mouse input update

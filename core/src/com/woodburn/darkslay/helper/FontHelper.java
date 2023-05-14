@@ -57,6 +57,7 @@ public class FontHelper {
     /* Add on May 13 | Used for chara descript in chara_select */
     public static BitmapFont tipHeaderFont;
     public static BitmapFont bannerNameFont;
+    public static BitmapFont losePowerFont;
 
     static FreeTypeFontGenerator.FreeTypeFontParameter param = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
@@ -155,6 +156,14 @@ public class FontHelper {
         param.borderColor = new Color(0.0F, 0.0F, 0.0F, 0.33F);
         param.spaceX = (int) (-2.0F * DisplayConfig.scale);
         bannerNameFont = prepFont(72.0F, true);
+        /* Add on May 13 | Used for chara select msg "please select char" */
+        param.borderWidth = 4.0F * DisplayConfig.scale;
+        param.borderColor = new Color(0.3F, 0.3F, 0.3F, 1.0F);
+        param.shadowColor = Settings.QUARTER_TRANSPARENT_BLACK_COLOR;
+        param.shadowOffsetX = Math.round(3.0F * DisplayConfig.scale);
+        param.shadowOffsetY = Math.round(3.0F * DisplayConfig.scale);
+        losePowerFont = prepFont(36.0F, true);
+
 
     }
     /**************************************** INITIALIZE ENDS ****************************************************/
@@ -214,6 +223,9 @@ public class FontHelper {
         return curWidth;
     }
 
+    /** 
+     * Special signs like TAB, NL...?
+     */
     public static void renderSmartText(
             SpriteBatch sb,
             BitmapFont font,
@@ -225,18 +237,71 @@ public class FontHelper {
         if (msg == null) return;
 
         float curHeight = 0.0F;
+        curWidth = 0.0F;
 
-//        font.setColor(baseColor);
-//
-//        for (String word : msg.split(" ")) {
-//            layout.setText(font, word);
-//            font.draw((Batch)sb, word, x + curWidth, y + curHeight);
-//            curWidth += layout.width + spaceWidth;
-//        }
+        layout.setText(font, " ");
+        spaceWidth = layout.width;
 
-        font.setColor(baseColor);
-        font.draw(sb, msg, x, y);
+        for (String word : msg.split(" ")) {
 
+            /* NL: next line. Jump over rest of the loop */
+            if (word.equals("NL")) {
+                curWidth = 0.0F;
+                curHeight -= lineSpacing;
+                continue;
+            }
+
+            /* Set color with weird markup ?! */
+            Color color = identifyColor(word).cpy();
+            if (!color.equals(Color.WHITE)) {
+                word = word.substring(2, word.length());
+                color.a = baseColor.a;
+                font.setColor(color);
+            } else {
+                font.setColor(baseColor);
+            }
+
+            layout.setText(font, word);
+
+            /* If this line is full, change to next line. */
+            if (curWidth + layout.width > lineWidth) {
+                curHeight -= lineSpacing;
+                font.draw((Batch) sb, word, x, y + curHeight);
+                curWidth = layout.width + spaceWidth;
+            } else {
+                
+                font.draw((Batch) sb, word, x + curWidth, y + curHeight);
+                curWidth += layout.width + spaceWidth;
+            }
+        } /* For loop ends */
+
+        layout.setText(font, msg); /* why? */
+    }
+
+    /**
+     * Use markup like 'r' 'g' to render the following text in 
+     * designated color
+     * @param word
+     * @return
+     */
+    private static Color identifyColor(String word) {
+        if (word.length() > 0 && word.charAt(0) == '#') {
+            switch (word.charAt(1)) {
+                case 'r':
+                    return Settings.RED_TEXT_COLOR;
+                case 'g':
+                    return Settings.GREEN_TEXT_COLOR;
+                case 'b':
+                    return Settings.BLUE_TEXT_COLOR;
+                case 'y':
+                    return Settings.GOLD_COLOR;
+                case 'p':
+                    return Settings.PURPLE_COLOR;
+            }
+            return Color.WHITE;
+        }
+
+        return Color.WHITE;
     }
 
 
@@ -265,7 +330,7 @@ public class FontHelper {
     }
 
     /**
-     * Render a font ... with lineWidth and scale
+     * Render a font ... with lineWidth, color and scale
      * @param sb
      * @param font
      * @param msg
@@ -286,14 +351,27 @@ public class FontHelper {
     }
 
     /**
-     * Render a font ... with lineWidth and NO scale
-     * @param sb
-     * @param font
-     * @param msg
-     * @param x
-     * @param y
-     * @param lineWidth
-     * @param c
+     * Render fonr with color and scale
+     */
+    public static void renderFontCenteredHeight(
+        SpriteBatch sb, BitmapFont font, String msg, float x, float y, Color c, float scale
+    ) {
+        font.getData().setScale(scale);
+        layout.setText(font, msg);
+        renderFont(sb, font, msg, x - layout.width / 2.0F, y + layout.height / 2.0F, c);
+        font.getData().setScale(1.0F);
+    }
+
+    /**
+     * Helper func ...
+     */
+    public static void renderFont(SpriteBatch sb, BitmapFont font, String msg, float x, float y, Color c) {
+        font.setColor(c);
+        font.draw((Batch) sb, msg, x, y);
+    }
+
+    /**
+     * Render a font ... with lineWidth, color, and NO scale
      */
     public static void renderFontCenteredHeight(
         SpriteBatch sb, BitmapFont font, String msg, float x, float y, float lineWidth, Color c
@@ -301,6 +379,13 @@ public class FontHelper {
         layout.setText(font, msg, c, lineWidth, 1, true);
         font.setColor(c);
         font.draw(sb, msg, x, y + layout.height / 2.0F, lineWidth, 1, true); // Center-align to y-axis
+    }
+
+
+    public static void renderFontCentered(SpriteBatch sb, BitmapFont font, String msg, float x,
+            float y, Color c) {
+        layout.setText(font, msg);
+        renderFont(sb, font, msg, x - layout.width / 2.0F, y + layout.height / 2.0F, c);
     }
 
 }

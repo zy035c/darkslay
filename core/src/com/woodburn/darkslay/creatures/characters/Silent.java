@@ -6,10 +6,6 @@ import com.woodburn.darkslay.helper.ImageMaster;
 
 public class Silent extends Character {
 
-    private static String[] TEXT = {
-        "Silent",
-        "Desc"
-    };
 
     private static Silent singleton;
 
@@ -18,8 +14,7 @@ public class Silent extends Character {
             singleton = new Silent();
 
             singleton.playerClass = PlayerClass.Silent;
-            singleton.nameString = TEXT[0];
-            singleton.description = TEXT[1];
+         
             singleton.startingDeck = initDeck();
 
             singleton.portraitImg = ImageMaster.SILENT_FULL; // 
