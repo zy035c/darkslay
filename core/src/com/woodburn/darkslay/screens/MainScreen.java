@@ -58,6 +58,9 @@ public class MainScreen {
 
     }
 
+
+    public static boolean isFadingOut;
+
     public void render(SpriteBatch sb) {
         titleScreen.render(sb);
         if (curScreen == ScreenOption.Panel) {

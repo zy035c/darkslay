@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.woodburn.darkslay.core.GameStat;
 import com.woodburn.darkslay.creatures.AbstractPlayer.PlayerClass;
 import com.woodburn.darkslay.global_config.DisplayConfig;
 import com.woodburn.darkslay.global_config.Settings;
@@ -13,6 +14,7 @@ import com.woodburn.darkslay.helper.MathHelper;
 import com.woodburn.darkslay.localization.UIStrings;
 import com.woodburn.darkslay.screens.MainScreen;
 import com.woodburn.darkslay.screens.reused.ConfirmButton;
+import com.woodburn.drop_game.GameScreen;
 
 public class CharaSelectScreen {
     
@@ -73,7 +75,7 @@ public class CharaSelectScreen {
                 this.anySelected = true;
             }
         }
-
+    
         /* 
          *  Cancel Button Handler 
          */
@@ -107,11 +109,20 @@ public class CharaSelectScreen {
             this.confirmButton.clickedTail("CharaSelectScreen");
 
             this.confirmButton.isDisabled = true; /* Cannot click many times */
-             
+            this.confirmButton.hide();
+
+            /* Set seed? */
+            MainScreen.isFadingOut = true;
+            
+            GameStat.gameInit();
+            
+            /* Reset current Screen */
+            for (CharaButton b : this.options) b.selected = false;
+            this.bgCharColor.a = 0.0F;
+            this.anySelected = false;         
         }
 
-
-        // MainScreen.superDarken = this.anySelected;
+        // MainScreen.titleScreen.superDarken = this.anySelected; /* superdarken title Screen */
     }
 
     public void fadeOut() {

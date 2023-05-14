@@ -40,5 +40,33 @@ public class GameStat {
         }
     }
 
+    public class PlayerInfo {
+        String name;
+        int UID;
+
+        PlayMode playMode;
+
+        PlayerClass playerClass;
+
+        public PlayerInfo() {
+
+        }
+
+    }
+
+
+    public static boolean inGame = false;
+    /**
+     * ------------
+     */
+    public static void gameInit() {
+
+        if (inGame) {
+            System.out.println("[WANRING] GameStat.gameInit tries to start game but the game is already started.");
+            return;
+        }
+        inGame = true;
+
+    }
 
 }
