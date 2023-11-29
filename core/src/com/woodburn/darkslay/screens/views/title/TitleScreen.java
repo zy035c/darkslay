@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Array;
 import com.woodburn.darkslay.global_config.DisplayConfig;
 import com.woodburn.darkslay.helper.ImageMaster;
 import com.woodburn.darkslay.helper.MathHelper;
+import com.woodburn.darkslay.screens.MainScreen;
 
 import java.util.ArrayList;
 
@@ -47,23 +48,6 @@ public class TitleScreen {
     public void update() {
         this.bg.update();
         for (TitleButton btn : buttons) btn.update();
-    }
-
-    /**
-    for darkening everything in the screen
-    */
-    private final Color screenColor = new Color(0.0F, 0.0F, 0.0F, 0.0F);
-
-    public boolean darken;
-    public boolean superDarken;
-
-    public void render(SpriteBatch sb) {
-        bg.render(sb);
-        sb.setColor(this.screenColor);
-        // fill the bg for darkening
-        sb.draw(ImageMaster.WHITE_SQUARE_IMG, 0.0F, 0.0F, DisplayConfig.WIDTH, DisplayConfig.HEIGHT);
-
-        for (TitleButton btn : buttons) btn.render(sb);
 
         // tint the bg under different dark degree
         if (this.darken) {
@@ -75,6 +59,27 @@ public class TitleScreen {
         }
     }
 
+    /**
+    For darkening everything in the screen
+    */
+    private final Color screenColor = new Color(0.0F, 0.0F, 0.0F, 0.0F);
+
+    /**
+     * Darken the background of title screen (but not foreground panels)
+     */
+    public boolean darken;
+    public boolean superDarken;
+
+    public void render(SpriteBatch sb) {
+        bg.render(sb);
+        sb.setColor(this.screenColor);
+        // fill the bg for darkening
+        sb.draw(ImageMaster.WHITE_SQUARE_IMG, 0.0F, 0.0F, DisplayConfig.WIDTH, DisplayConfig.HEIGHT);
+
+        for (TitleButton btn : buttons) btn.render(sb);
+
+    }
+
     public void hideMenuButtons() {
         for (TitleButton btn : buttons) btn.hide();
     }
@@ -83,6 +88,9 @@ public class TitleScreen {
 
     }
 
+    /**
+     * Darken the background of title screen (but not foreground panels)
+     */
     public void darken() {
         this.darken = true;
     }

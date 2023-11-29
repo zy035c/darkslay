@@ -146,6 +146,7 @@ public class PanelScreenButton {
     }
 
     /**
+     * Panel Click Handler
      * The result, next screen that should be displayed. 
      */
     private void buttonEffect() {
@@ -196,7 +197,7 @@ public class PanelScreenButton {
     public void render(SpriteBatch sb) {
 
         // init sb color
-        // sb.setColor(this.wColor);
+        sb.setColor(this.wColor);
 
         // Draw the original background panelImg
         drawThings(sb, this.panelImg, true);
@@ -311,10 +312,8 @@ public class PanelScreenButton {
             this.cColor
         );
 
-    
-        
-        sb.setColor(Color.WHITE); /* Resume color */
         this.hb.render(sb);
+        sb.setColor(Color.WHITE); /* Resume color */
     }
 
     /**

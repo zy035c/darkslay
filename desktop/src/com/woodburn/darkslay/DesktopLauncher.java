@@ -12,8 +12,6 @@ public class DesktopLauncher {
 		config.setWindowedMode(1280, 720);
 		config.useVsync(true);
 		config.setForegroundFPS(60);
-		// config.setTitle("Dark-Slay-22-10-22");
-		// new Lwjgl3Application(new DropGame(), config);
 		new Lwjgl3Application(new WoodBurnGame(), config);
 	}
 }

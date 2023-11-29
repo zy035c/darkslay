@@ -14,6 +14,7 @@ import com.woodburn.darkslay.helper.MathHelper;
 import com.woodburn.darkslay.localization.UIStrings;
 import com.woodburn.darkslay.screens.MainScreen;
 import com.woodburn.darkslay.screens.reused.ConfirmButton;
+import com.woodburn.darkslay.screens.views.main_panels.PanelScreen;
 import com.woodburn.drop_game.GameScreen;
 
 public class CharaSelectScreen {
@@ -84,7 +85,6 @@ public class CharaSelectScreen {
             // MainScreen.superDarken = false; /* Not really necce */
             // InputHelper.pressedEscape = false;
             MainScreen.cancelButton.clickedTail("CharaSelectScreen");
-
             MainScreen.panelScreen.open();
             
             /* Reset current Screen */
@@ -110,13 +110,17 @@ public class CharaSelectScreen {
 
             this.confirmButton.isDisabled = true; /* Cannot click many times */
             this.confirmButton.hide();
+            MainScreen.cancelButton.hide();
 
             /* Set seed? */
+            /* Fade out music. */
             MainScreen.isFadingOut = true;
             
             GameStat.gameInit();
-            
-            /* Reset current Screen */
+        }
+
+        if (MainScreen.fadedOut) {
+            /* Reset Char Select Screen */
             for (CharaButton b : this.options) b.selected = false;
             this.bgCharColor.a = 0.0F;
             this.anySelected = false;         

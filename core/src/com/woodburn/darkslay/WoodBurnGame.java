@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.woodburn.darkslay.creatures.AbstractPlayer;
 import com.woodburn.darkslay.dungeons.AbstractDungeon;
+import com.woodburn.darkslay.dungeons.TestDungeon;
+import com.woodburn.darkslay.dungeons.TheSpire;
 import com.woodburn.darkslay.global_config.DisplayConfig;
 import com.woodburn.darkslay.helper.FontHelper;
 import com.woodburn.darkslay.helper.ImageMaster;
@@ -16,6 +18,7 @@ import com.woodburn.darkslay.helper.InputHelper;
 import com.woodburn.darkslay.localization.Localization;
 import com.woodburn.darkslay.screens.MainScreen;
 import com.woodburn.darkslay.screens.views.title.TitleScreen;
+import com.woodburn.drop_game.MainMenuScreen;
 
 public class WoodBurnGame implements ApplicationListener {
 
@@ -95,13 +98,45 @@ public class WoodBurnGame implements ApplicationListener {
         }
 
         InputHelper.updateFirst();
-        mainScreen.update();
+
+        /* 
+         * fadedOut : boolean should be static.
+         * It's not static originally, so in other
+         * classes, use WoodBurnGame.mainScreen.fadedOut
+         * which is too long.
+         * 
+         * That's why I made it static and in other
+         * classes use MainScreen.fadedOut
+         * 
+         * If fadedOut, the game screen is going to stop
+         * update and dungeon takes over.
+         */
+        if (!MainScreen.fadedOut) {
+            mainScreen.update();
+        } else {
+            if (dungeon == null) {
+                createDungeon("Test");
+            }
+            dungeon.update();
+        }
 
         InputHelper.updateLast();
     }
 
-    public AbstractDungeon getDungeon(String key, AbstractPlayer p) {
-        return null;
+    /**
+     * Return a specific dungeon (local map)
+     * @param key
+     * @param p
+     * @return
+     */
+    public void createDungeon(String key) {
+        switch (key) {
+            case "Spire":
+                new TheSpire();
+            case "Test":
+                new TestDungeon();
+            default:
+        }
     }
 
 }

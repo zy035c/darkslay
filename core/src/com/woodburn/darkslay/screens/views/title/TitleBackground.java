@@ -93,6 +93,8 @@ public class TitleBackground {
 
     public void render(SpriteBatch sb) {
 
+        sb.setColor(Color.WHITE); /* Clear spriteBatch color */
+
         renderRegion(
                 sb,
                 this.sky,
